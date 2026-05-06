@@ -27,25 +27,10 @@
             background: var(--black);
             color: #fff;
             overflow-x: hidden;
-            cursor: none;
+            
         }
 
-        /* ── CUSTOM CURSOR ── */
-        .cursor-dot {
-            position: fixed; width: 8px; height: 8px;
-            background: var(--gold); border-radius: 50%;
-            pointer-events: none; z-index: 9999;
-            transform: translate(-50%,-50%);
-            transition: transform 0.1s;
-        }
-        .cursor-ring {
-            position: fixed; width: 36px; height: 36px;
-            border: 1px solid rgba(212,175,55,0.5); border-radius: 50%;
-            pointer-events: none; z-index: 9998;
-            transform: translate(-50%,-50%);
-            transition: all 0.15s ease;
-        }
-        body:hover .cursor-dot { transform: translate(-50%,-50%) scale(1); }
+       
 
         /* ── PARTICLE CANVAS ── */
         #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -63,14 +48,28 @@
             position: fixed; top: 22px; left: 50%; transform: translateX(-50%);
             z-index: 1000;
         }
+        /* CHANGE 3: Music button redesigned with equalizer bars */
         .music-ui button {
+            display: flex; align-items: center; gap: 10px;
             background: none; border: 1px solid rgba(212,175,55,0.3);
-            color: var(--gold); font-size: 0.8rem; padding: 6px 14px;
+            color: var(--gold); font-size: 0.8rem; padding: 6px 16px;
             border-radius: 20px; cursor: none; letter-spacing: 2px;
             backdrop-filter: blur(10px);
-            transition: all 0.3s;
+            transition: all 0.3s; font-family: 'Montserrat', sans-serif;
         }
         .music-ui button:hover { border-color: var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
+        .music-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
+        .music-bars span {
+            width: 2px; background: var(--gold); border-radius: 2px;
+            animation: musicBar 0.8s ease-in-out infinite alternate;
+        }
+        .music-bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+        .music-bars span:nth-child(2) { height: 12px; animation-delay: 0.2s; }
+        .music-bars span:nth-child(3) { height: 8px;  animation-delay: 0.4s; }
+        .music-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+        .music-bars span:nth-child(5) { height: 5px;  animation-delay: 0.3s; }
+        .music-bars.paused span { animation-play-state: paused; height: 3px !important; }
+        @keyframes musicBar { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
 
         /* ── NAV ── */
         .nav-ui {
@@ -143,11 +142,26 @@
 
         .hero-content { position: relative; z-index: 2; }
 
+        /* CHANGE 4: Radial gold glow behind logo */
+        .logo-box { position: relative; display: inline-block; }
+        .logo-glow {
+            position: absolute; inset: -30px;
+            background: radial-gradient(circle, rgba(212,175,55,0.18), transparent 65%);
+            border-radius: 50%;
+            animation: logoGlowAnim 3s ease-in-out infinite alternate;
+            pointer-events: none; z-index: 0;
+        }
+        @keyframes logoGlowAnim {
+            0%   { opacity: 0.5; transform: scale(0.85); }
+            100% { opacity: 1;   transform: scale(1.15); }
+        }
+
         .logo-box img {
             width: 320px; height: auto;
             animation: revealLogo 2.5s cubic-bezier(0.16,1,0.3,1) forwards;
             filter: drop-shadow(0 0 40px rgba(212,175,55,0.3));
             transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+            position: relative; z-index: 1;
         }
         @keyframes revealLogo {
             from { transform: scale(0.4) translateY(20px); opacity: 0; filter: drop-shadow(0 0 0px transparent); }
@@ -202,12 +216,22 @@
             color: var(--gold); opacity: 0.7; margin-bottom: 10px;
             font-weight: 400;
         }
+
+        /* CHANGE 1: Gold shimmer on span inside section titles */
         .section-title {
             font-family: 'Cinzel', serif;
             color: #fff; font-size: 1.6rem; margin-bottom: 6px;
             text-align: center; letter-spacing: 8px; font-weight: 400;
         }
-        .section-title span { color: var(--gold); }
+        .section-title span {
+            color: transparent;
+            background: linear-gradient(135deg, #8B6914, #D4AF37, #f5d76e, #D4AF37, #8B6914);
+            background-size: 300%;
+            -webkit-background-clip: text; background-clip: text;
+            animation: goldShimmer 3s linear infinite;
+        }
+        @keyframes goldShimmer { 0% { background-position: 0%; } 100% { background-position: 300%; } }
+
         .title-line {
             width: 60px; height: 1px; margin: 16px auto 50px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -234,12 +258,16 @@
             transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
             cursor: none; position: relative; overflow: hidden;
         }
+
+        /* CHANGE 2: Shimmer sweep on hover */
         .social-row::before {
             content: ''; position: absolute; inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.06), transparent);
-            transform: translateX(-100%); transition: transform 0.6s ease;
+            background: linear-gradient(105deg, transparent 38%, rgba(212,175,55,0.1) 50%, transparent 62%);
+            transform: translateX(-130%); transition: transform 0.65s ease;
+            pointer-events: none;
         }
-        .social-row:hover::before { transform: translateX(100%); }
+        .social-row:hover::before { transform: translateX(130%); }
+
         .social-row::after {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0;
             width: 2px; background: var(--gold);
@@ -289,6 +317,76 @@
             border-radius: 50%; animation: spin 1.2s linear infinite;
         }
         @keyframes spin { to{transform:rotate(360deg)} }
+        /* Shimmer sweep on hover */
+.social-row::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 38%,rgba(212,175,55,0.08) 50%,transparent 62%);
+  transform:translateX(-120%);transition:transform 0.6s ease;
+  pointer-events:none;
+}
+.social-row:hover::before{transform:translateX(120%);}
+
+/* Left accent bar */
+.social-row::after{
+  content:'';position:absolute;left:0;top:15%;bottom:15%;
+  width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  transform:scaleY(0);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  border-radius:2px;
+}
+.social-row:hover::after{transform:scaleY(1);}
+
+.social-row:hover{
+  transform:translateX(8px) !important;
+  background:linear-gradient(135deg,rgba(212,175,55,0.07),rgba(212,175,55,0.02));
+  border-color:rgba(212,175,55,0.38);
+  box-shadow:0 10px 50px rgba(0,0,0,0.7),8px 0 30px rgba(212,175,55,0.07);
+}
+
+.s-left{display:flex;align-items:center;gap:16px;}
+.s-icon{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(212,175,55,0.18);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  transition:all 0.4s;
+  background:rgba(212,175,55,0.02);
+  flex-shrink:0;
+}
+.s-icon::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,0.18),transparent);
+  transform:scale(0);transition:transform 0.4s;
+}
+.social-row:hover .s-icon::before{transform:scale(1);}
+.social-row:hover .s-icon{
+  border-color:var(--gold);
+  box-shadow:0 0 18px rgba(212,175,55,0.28);
+}
+.s-icon i{font-size:0.95rem;color:var(--gold);position:relative;z-index:1;}
+
+.s-text{display:flex;flex-direction:column;gap:3px;}
+.s-name{font-size:0.65rem;letter-spacing:4px;font-weight:300;color:rgba(255,255,255,0.9);}
+.s-hint{font-size:0.48rem;letter-spacing:2px;color:rgba(255,255,255,0.28);}
+
+.s-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.s-badge{
+  font-size:0.44rem;letter-spacing:2px;color:var(--gold);
+  border:1px solid rgba(212,175,55,0.3);padding:3px 8px;border-radius:20px;
+  animation:badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse{0%,100%{opacity:0.6}50%{opacity:1;box-shadow:0 0 10px rgba(212,175,55,0.2);}}
+.s-arrow{color:rgba(212,175,55,0.38);font-size:0.62rem;transition:all 0.3s;}
+.social-row:hover .s-arrow{color:var(--gold);transform:translateX(4px);}
+.spinner{
+  width:16px;height:16px;
+  border:1.5px solid rgba(212,175,55,0.1);
+  border-top:1.5px solid var(--gold);
+  border-radius:50%;animation:spin 1s linear infinite;
+  flex-shrink:0;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 
         /* ── FOUNDER SECTION ── */
         .founder-card {
@@ -367,9 +465,7 @@
         }
         .star-rating label:hover,
         .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label {
-            color: var(--gold);
-        }
+        .star-rating input:checked ~ label { color: var(--gold); }
         .star-rating label:hover { transform: scale(1.2); }
 
         .field-wrap { position: relative; margin-bottom: 18px; }
@@ -437,18 +533,20 @@
 </head>
 <body>
 
-    <!-- Cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
+    
     <!-- Particles -->
     <canvas id="particles"></canvas>
 
     <audio id="player" loop><source src="your-mp.mp3" type="audio/mpeg"></audio>
 
-    <!-- Music -->
+    <!-- CHANGE 3: Music button with live equalizer bars -->
     <div class="music-ui">
-        <button onclick="ctrlMusic()"><i id="mIcon" class="fas fa-volume-mute"></i>&nbsp;&nbsp;<span id="mLabel">MUTED</span></button>
+        <button onclick="ctrlMusic()">
+            <div class="music-bars paused" id="musicBars">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <span id="mLabel">MUSIC</span>
+        </button>
     </div>
 
     <!-- Nav -->
@@ -466,7 +564,11 @@
         <video autoplay muted loop playsinline class="video-bg"><source src="your-video.mp4" type="video/mp4"></video>
         <div class="overlay"></div>
         <div class="hero-content">
-            <div class="logo-box"><img src="logo.png" id="brandLogo" alt="Luminia"></div>
+            <!-- CHANGE 4: Logo glow div added -->
+            <div class="logo-box">
+                <div class="logo-glow"></div>
+                <img src="logo.png" id="brandLogo" alt="Luminia">
+            </div>
             <div class="hero-divider"></div>
             <div class="typewriter-wrap"><span id="txt"></span><span class="cursor"></span></div>
         </div>
@@ -481,6 +583,7 @@
     <!-- Connect Hub -->
     <div class="section" id="hub">
         <div class="section-label">SOCIAL PRESENCE</div>
+        <!-- CHANGE 1: "Hub" wrapped in span for shimmer -->
         <h2 class="section-title">Connect <span>Hub</span></h2>
         <div class="title-line"></div>
         <div class="hub-wrap">
@@ -495,9 +598,7 @@
                             <span class="s-sub">Follow our page</span>
                         </div>
                     </div>
-                    <div class="s-right">
-                        <i class="fas fa-arrow-right s-arrow"></i>
-                    </div>
+                    <div class="s-right"><i class="fas fa-arrow-right s-arrow"></i></div>
                 </a>
 
                 <a href="https://www.instagram.com/luminia.official.01?igsh=MTN0eTE4ZWlyZXc1Mw==" target="_blank" class="social-row">
@@ -508,9 +609,7 @@
                             <span class="s-sub">Daily inspiration</span>
                         </div>
                     </div>
-                    <div class="s-right">
-                        <i class="fas fa-arrow-right s-arrow"></i>
-                    </div>
+                    <div class="s-right"><i class="fas fa-arrow-right s-arrow"></i></div>
                 </a>
 
                 <a href="javascript:void(0)" onclick="alert('WhatsApp — Coming Soon!')" class="social-row">
@@ -535,9 +634,7 @@
                             <span class="s-sub">luminia0101@gmail.com</span>
                         </div>
                     </div>
-                    <div class="s-right">
-                        <i class="fas fa-arrow-right s-arrow"></i>
-                    </div>
+                    <div class="s-right"><i class="fas fa-arrow-right s-arrow"></i></div>
                 </a>
 
                 <a href="javascript:void(0)" onclick="alert('YouTube — Coming Soon! See You Soon.')" class="social-row">
@@ -577,10 +674,11 @@
     <!-- Founder -->
     <div class="section" id="fnd">
         <div class="section-label">A WORD FROM</div>
+        <!-- CHANGE 1: "Message" wrapped in span for shimmer -->
         <h2 class="section-title">Founder's <span>Message</span></h2>
         <div class="title-line"></div>
         <div class="founder-card">
-            <p>
+            <p><br><br>
                 LUMINIA started with a simple belief — light has the power to change how we feel, how we live, and how we experience our spaces.<br><br>
                 What began as an idea to create something meaningful is now growing into a brand built with passion, creativity, and care. Every piece we design carries a part of our vision — to bring warmth, calmness, and beauty into everyday life.<br><br>
                 Thank you for being part of this journey.
@@ -588,7 +686,7 @@
             <div class="tagline">GLOW BEYOND ORDINARY.</div>
             <div class="founder-sig">
                 <div class="sig-line"></div>
-                <div class="sig-name">Founder, LUMINIA</div>
+                <div class="sig-name"> Founder,  LUMINIA</div>
             </div>
         </div>
     </div>
@@ -598,6 +696,7 @@
     <!-- Review -->
     <div class="section" id="rev">
         <div class="section-label">YOUR VOICE MATTERS</div>
+        <!-- CHANGE 1: "Experience" wrapped in span for shimmer -->
         <h2 class="section-title">Rate Your <span>Experience</span></h2>
         <div class="title-line"></div>
         <div class="review-card">
@@ -629,22 +728,8 @@
     </footer>
 
     <script>
-        /* ── CURSOR ── */
-        const dot = document.getElementById('cursorDot');
-        const ring = document.getElementById('cursorRing');
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
-        (function animRing(){
-            rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
-            ring.style.left = rx+'px'; ring.style.top = ry+'px';
-            requestAnimationFrame(animRing);
-        })();
-        document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.6)'; ring.style.borderColor = 'rgba(212,175,55,0.7)'; });
-            el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(212,175,55,0.5)'; });
-        });
-
-        /* ── PARTICLES ── */
+      
+        /* CHANGE 5: TWINKLING STAR PARTICLES (cross/sparkle shape) */
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         let W, H, particles = [];
@@ -653,25 +738,39 @@
 
         function Particle(){
             this.x = Math.random()*W; this.y = Math.random()*H;
-            this.r = Math.random()*1.5+0.3;
-            this.vx = (Math.random()-0.5)*0.3; this.vy = (Math.random()-0.5)*0.3;
-            this.alpha = Math.random()*0.4+0.05;
-            this.flicker = Math.random()*0.02;
+            this.r = Math.random()*1.3+0.3;
+            this.vx = (Math.random()-0.5)*0.25; this.vy = (Math.random()-0.5)*0.25;
+            this.tw = Math.random()*Math.PI*2;   // twinkle phase
+            this.spd = Math.random()*0.025+0.01; // twinkle speed
         }
-        for(let i=0;i<80;i++) particles.push(new Particle());
+        for(let i=0;i<90;i++) particles.push(new Particle());
 
         function drawParticles(){
             ctx.clearRect(0,0,W,H);
             particles.forEach(p=>{
                 p.x += p.vx; p.y += p.vy;
-                p.alpha += (Math.random()-0.5)*p.flicker;
-                p.alpha = Math.max(0.02, Math.min(0.5, p.alpha));
+                p.tw += p.spd;
+                const a = 0.08 + Math.abs(Math.sin(p.tw)) * 0.38; // twinkle alpha
                 if(p.x<0||p.x>W) p.vx*=-1;
                 if(p.y<0||p.y>H) p.vy*=-1;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.fillStyle = `rgba(212,175,55,${a})`;
+
+                // Dot core
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-                ctx.fillStyle = `rgba(212,175,55,${p.alpha})`;
+                ctx.arc(0, 0, p.r, 0, Math.PI*2);
                 ctx.fill();
+
+                // Cross arms for sparkle/star look
+                if(p.r > 0.7){
+                    ctx.strokeStyle = `rgba(212,175,55,${a * 0.45})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath(); ctx.moveTo(-p.r*3.5, 0); ctx.lineTo(p.r*3.5, 0); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0, -p.r*3.5); ctx.lineTo(0, p.r*3.5); ctx.stroke();
+                }
+                ctx.restore();
             });
             requestAnimationFrame(drawParticles);
         }
@@ -687,17 +786,19 @@
             if(!e.target.closest('.nav-ui')) menu.style.display = 'none';
         });
 
-        /* ── MUSIC ── */
+        /* CHANGE 3: MUSIC with live bars */
         const track = document.getElementById('player');
         function ctrlMusic(){
+            const bars = document.getElementById('musicBars');
+            const lbl  = document.getElementById('mLabel');
             if(track.paused){
                 track.play();
-                document.getElementById('mIcon').className = 'fas fa-volume-up';
-                document.getElementById('mLabel').textContent = 'PLAYING';
+                bars.classList.remove('paused');
+                lbl.textContent = 'PLAYING';
             } else {
                 track.pause();
-                document.getElementById('mIcon').className = 'fas fa-volume-mute';
-                document.getElementById('mLabel').textContent = 'MUTED';
+                bars.classList.add('paused');
+                lbl.textContent = 'MUSIC';
             }
         }
 
