@@ -27,10 +27,7 @@
             background: var(--black);
             color: #fff;
             overflow-x: hidden;
-            
         }
-
-       
 
         /* ── PARTICLE CANVAS ── */
         #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -48,7 +45,6 @@
             position: fixed; top: 22px; left: 50%; transform: translateX(-50%);
             z-index: 1000;
         }
-        /* CHANGE 3: Music button redesigned with equalizer bars */
         .music-ui button {
             display: flex; align-items: center; gap: 10px;
             background: none; border: 1px solid rgba(212,175,55,0.3);
@@ -129,7 +125,6 @@
             z-index: -1;
         }
 
-        /* Gold lines decor */
         .hero::before, .hero::after {
             content: ''; position: absolute;
             left: 50%; transform: translateX(-50%);
@@ -142,7 +137,6 @@
 
         .hero-content { position: relative; z-index: 2; }
 
-        /* CHANGE 4: Radial gold glow behind logo */
         .logo-box { position: relative; display: inline-block; }
         .logo-glow {
             position: absolute; inset: -30px;
@@ -187,7 +181,7 @@
             animation: fadeUp 1s 2s ease both;
         }
         @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
-        .cursor { border-right: 1.5px solid var(--gold); animation: blink 0.75s infinite; margin-left: 2px; }
+        .cursor-blink { border-right: 1.5px solid var(--gold); animation: blink 0.75s infinite; margin-left: 2px; }
         @keyframes blink { 50%{opacity:0} }
 
         .scroll-arrow {
@@ -217,7 +211,6 @@
             font-weight: 400;
         }
 
-        /* CHANGE 1: Gold shimmer on span inside section titles */
         .section-title {
             font-family: 'Cinzel', serif;
             color: #fff; font-size: 1.6rem; margin-bottom: 6px;
@@ -259,27 +252,27 @@
             cursor: none; position: relative; overflow: hidden;
         }
 
-        /* CHANGE 2: Shimmer sweep on hover */
         .social-row::before {
             content: ''; position: absolute; inset: 0;
-            background: linear-gradient(105deg, transparent 38%, rgba(212,175,55,0.1) 50%, transparent 62%);
-            transform: translateX(-130%); transition: transform 0.65s ease;
+            background: linear-gradient(105deg, transparent 38%, rgba(212,175,55,0.08) 50%, transparent 62%);
+            transform: translateX(-120%); transition: transform 0.6s ease;
             pointer-events: none;
         }
-        .social-row:hover::before { transform: translateX(130%); }
+        .social-row:hover::before { transform: translateX(120%); }
 
         .social-row::after {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 2px; background: var(--gold);
+            content: ''; position: absolute; left: 0; top: 15%; bottom: 15%;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--gold), transparent);
             transform: scaleY(0); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-            transform-origin: bottom;
+            border-radius: 2px;
         }
         .social-row:hover::after { transform: scaleY(1); }
         .social-row:hover {
-            transform: translateX(6px);
-            background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(212,175,55,0.02));
-            border-color: rgba(212,175,55,0.35);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.6), 4px 0 30px rgba(212,175,55,0.1);
+            transform: translateX(8px);
+            background: linear-gradient(135deg, rgba(212,175,55,0.07), rgba(212,175,55,0.02));
+            border-color: rgba(212,175,55,0.38);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.7), 8px 0 30px rgba(212,175,55,0.07);
         }
 
         .s-left { display: flex; align-items: center; gap: 18px; }
@@ -317,76 +310,6 @@
             border-radius: 50%; animation: spin 1.2s linear infinite;
         }
         @keyframes spin { to{transform:rotate(360deg)} }
-        /* Shimmer sweep on hover */
-.social-row::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg,transparent 38%,rgba(212,175,55,0.08) 50%,transparent 62%);
-  transform:translateX(-120%);transition:transform 0.6s ease;
-  pointer-events:none;
-}
-.social-row:hover::before{transform:translateX(120%);}
-
-/* Left accent bar */
-.social-row::after{
-  content:'';position:absolute;left:0;top:15%;bottom:15%;
-  width:2px;
-  background:linear-gradient(180deg,transparent,var(--gold),transparent);
-  transform:scaleY(0);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
-  border-radius:2px;
-}
-.social-row:hover::after{transform:scaleY(1);}
-
-.social-row:hover{
-  transform:translateX(8px) !important;
-  background:linear-gradient(135deg,rgba(212,175,55,0.07),rgba(212,175,55,0.02));
-  border-color:rgba(212,175,55,0.38);
-  box-shadow:0 10px 50px rgba(0,0,0,0.7),8px 0 30px rgba(212,175,55,0.07);
-}
-
-.s-left{display:flex;align-items:center;gap:16px;}
-.s-icon{
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(212,175,55,0.18);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-  transition:all 0.4s;
-  background:rgba(212,175,55,0.02);
-  flex-shrink:0;
-}
-.s-icon::before{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,175,55,0.18),transparent);
-  transform:scale(0);transition:transform 0.4s;
-}
-.social-row:hover .s-icon::before{transform:scale(1);}
-.social-row:hover .s-icon{
-  border-color:var(--gold);
-  box-shadow:0 0 18px rgba(212,175,55,0.28);
-}
-.s-icon i{font-size:0.95rem;color:var(--gold);position:relative;z-index:1;}
-
-.s-text{display:flex;flex-direction:column;gap:3px;}
-.s-name{font-size:0.65rem;letter-spacing:4px;font-weight:300;color:rgba(255,255,255,0.9);}
-.s-hint{font-size:0.48rem;letter-spacing:2px;color:rgba(255,255,255,0.28);}
-
-.s-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.s-badge{
-  font-size:0.44rem;letter-spacing:2px;color:var(--gold);
-  border:1px solid rgba(212,175,55,0.3);padding:3px 8px;border-radius:20px;
-  animation:badgePulse 2s ease-in-out infinite;
-}
-@keyframes badgePulse{0%,100%{opacity:0.6}50%{opacity:1;box-shadow:0 0 10px rgba(212,175,55,0.2);}}
-.s-arrow{color:rgba(212,175,55,0.38);font-size:0.62rem;transition:all 0.3s;}
-.social-row:hover .s-arrow{color:var(--gold);transform:translateX(4px);}
-.spinner{
-  width:16px;height:16px;
-  border:1.5px solid rgba(212,175,55,0.1);
-  border-top:1.5px solid var(--gold);
-  border-radius:50%;animation:spin 1s linear infinite;
-  flex-shrink:0;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
 
         /* ── FOUNDER SECTION ── */
         .founder-card {
@@ -410,7 +333,7 @@
         }
         .section.active .founder-card {
             box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.08);
-            border-color: rgba(212,175,55,0.25);
+            border-color: rgba(212,175,75,0.25);
         }
         .founder-card p {
             font-family: 'Cormorant Garamond', serif;
@@ -529,17 +452,141 @@
             .founder-card, .review-card { padding: 30px 24px; }
             .social-row { padding: 0 18px; height: 64px; }
         }
+
+        #orb-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .orb-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 80%);
+            color: #fff;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.4s all;
+            padding: 15px;
+            line-height: 1.3;
+            text-transform: uppercase;
+            backdrop-filter: blur(5px);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .orb-btn:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 25px var(--gold-glow);
+            transform: scale(1.05);
+        }
+
+        /* ── AI RESULT STYLING ── */
+        .result-block {
+            margin-bottom: 28px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+        .result-block:last-child { border-bottom: none; margin-bottom: 0; }
+        .result-label {
+            font-size: 0.5rem; letter-spacing: 5px; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 10px; font-family: 'Montserrat', sans-serif;
+        }
+        .result-title {
+            font-family: 'Cinzel', serif; font-size: 1.5rem;
+            color: #fff; letter-spacing: 4px; line-height: 1.4;
+        }
+        .result-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem; line-height: 1.9;
+            color: rgba(255,255,255,0.82); letter-spacing: 0.3px;
+        }
+        .result-candle-box {
+            background: rgba(212,175,55,0.05);
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 3px; padding: 20px 24px;
+            display: flex; align-items: center; gap: 18px;
+        }
+        .candle-icon-big { font-size: 2.2rem; }
+        .candle-name { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 4px; color: var(--gold); }
+        .candle-code { font-size: 0.55rem; letter-spacing: 3px; color: rgba(212,175,55,0.55); margin-top: 4px; font-family: 'Montserrat', sans-serif; }
+        .candle-why { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: rgba(255,255,255,0.65); margin-top: 6px; font-style: italic; }
+        .ritual-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .ritual-list li {
+            display: flex; align-items: flex-start; gap: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.6;
+        }
+        .ritual-num {
+            flex-shrink: 0; width: 22px; height: 22px;
+            border: 1px solid rgba(212,175,55,0.4); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.55rem; color: var(--gold); font-family: 'Montserrat', sans-serif;
+            margin-top: 2px;
+        }
+        .proud-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem; font-style: italic;
+            color: var(--gold-light); text-align: center;
+            line-height: 1.8; letter-spacing: 1px;
+            padding: 20px 0;
+        }
+
+        /* ── CHAT BOX STYLING ── */
+        #chat-logs::-webkit-scrollbar { width: 3px; }
+        #chat-logs::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); border-radius: 2px; }
+        .chat-msg {
+            margin-bottom: 14px;
+            animation: fadeUp 0.4s ease;
+        }
+        .chat-msg.user { text-align: right; }
+        .chat-bubble {
+            display: inline-block; padding: 10px 16px; border-radius: 2px;
+            font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; line-height: 1.6;
+            max-width: 85%;
+        }
+        .chat-msg.user .chat-bubble {
+            background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2);
+            color: rgba(255,255,255,0.9);
+        }
+        .chat-msg.ai .chat-bubble {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1);
+            color: rgba(255,255,255,0.75);
+            text-align: left;
+        }
+        .chat-sender {
+            font-size: 0.45rem; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 4px; font-family: 'Montserrat', sans-serif;
+        }
+        .chat-typing {
+            display: flex; gap: 4px; align-items: center; padding: 10px 16px;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1);
+            border-radius: 2px; width: fit-content;
+        }
+        .chat-typing span {
+            width: 5px; height: 5px; background: var(--gold); border-radius: 50%;
+            animation: typingDot 1s infinite;
+        }
+        .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingDot { 0%,60%,100%{opacity:0.2;transform:scale(0.8)} 30%{opacity:1;transform:scale(1)} }
     </style>
 </head>
 <body>
 
-    
-    <!-- Particles -->
     <canvas id="particles"></canvas>
 
     <audio id="player" loop><source src="your-mp.mp3" type="audio/mpeg"></audio>
 
-    <!-- CHANGE 3: Music button with live equalizer bars -->
     <div class="music-ui">
         <button onclick="ctrlMusic()">
             <div class="music-bars paused" id="musicBars">
@@ -549,7 +596,6 @@
         </button>
     </div>
 
-    <!-- Nav -->
     <div class="nav-ui">
         <button class="ui-btn" onclick="showNav()"><i class="fas fa-bars-staggered"></i></button>
         <div class="nav-links" id="menu">
@@ -559,18 +605,16 @@
         </div>
     </div>
 
-    <!-- Hero -->
     <div class="hero">
         <video autoplay muted loop playsinline class="video-bg"><source src="your-video.mp4" type="video/mp4"></video>
         <div class="overlay"></div>
         <div class="hero-content">
-            <!-- CHANGE 4: Logo glow div added -->
             <div class="logo-box">
                 <div class="logo-glow"></div>
                 <img src="logo.png" id="brandLogo" alt="Luminia">
             </div>
             <div class="hero-divider"></div>
-            <div class="typewriter-wrap"><span id="txt"></span><span class="cursor"></span></div>
+            <div class="typewriter-wrap"><span id="txt"></span><span class="cursor-blink"></span></div>
         </div>
         <div class="scroll-arrow">
             <span>SCROLL</span>
@@ -580,10 +624,54 @@
 
     <div class="sep"></div>
 
-    <!-- Connect Hub -->
+    <div class="section" id="luminia-journey">
+        <div class="section-label">THE LUMINIA EXPERIENCE</div>
+        <h2 class="section-title">Scan Your <span>Soul</span></h2>
+        <div class="title-line"></div>
+
+        <div class="founder-card" id="experience-container" style="min-height: 450px;">
+            <div id="quiz-flow">
+                <p id="q-text" style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); text-align: center; margin-bottom: 40px; min-height: 80px;"></p>
+                <div id="orb-container"></div>
+            </div>
+
+            <div id="ai-loading" style="display: none; text-align: center; padding: 50px 0;">
+                <div class="spinner" style="margin: 0 auto; width:28px; height:28px;"></div>
+                <p style="margin-top: 20px; font-size: 0.65rem; color: var(--gold); letter-spacing: 3px; font-family:'Montserrat',sans-serif;">YOUR SANCTUARY IS BEING CRAFTED...</p>
+                <p style="margin-top: 8px; font-family:'Cormorant Garamond',serif; font-size:0.9rem; color:rgba(255,255,255,0.3); font-style:italic;">The consultant is listening to your soul.</p>
+            </div>
+
+            <div id="result-area" style="display: none; animation: fadeUp 1s ease;">
+                <div id="ai-result-content"></div>
+
+                <div id="cta-buttons" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                    <a id="whatsapp-order" href="#" target="_blank" class="submit-btn" style="text-decoration: none; text-align: center; display:block;">
+                        <span>🕯️ &nbsp; ORDER VIA WHATSAPP</span>
+                    </a>
+                    <button class="submit-btn" onclick="enableChat()" id="chat-toggle-btn" style="background:transparent;">
+                        <span>✦ &nbsp; CONTINUE WITH YOUR CONSULTANT</span>
+                    </button>
+                    <button class="submit-btn" onclick="restartQuiz()" style="background:transparent; border-color:rgba(212,175,55,0.25); color:rgba(255,255,255,0.4);">
+                        <span>↺ &nbsp; TAKE THE JOURNEY AGAIN</span>
+                    </button>
+                </div>
+
+                <div id="chat-box" style="display: none; margin-top: 30px; border-top: 1px solid rgba(212,175,55,0.12); padding-top: 24px;">
+                    <div id="chat-logs" style="max-height: 280px; overflow-y: auto; margin-bottom: 16px; padding-right: 4px;"></div>
+                    <div style="display: flex; gap: 10px; align-items:center;">
+                        <input type="text" id="chat-input" class="field" placeholder="Ask your consultant anything..." style="flex:1;"
+                            onkeydown="if(event.key==='Enter') sendChat()">
+                        <button class="ui-btn" onclick="sendChat()" style="flex-shrink:0;"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sep"></div>
+
     <div class="section" id="hub">
         <div class="section-label">SOCIAL PRESENCE</div>
-        <!-- CHANGE 1: "Hub" wrapped in span for shimmer -->
         <h2 class="section-title">Connect <span>Hub</span></h2>
         <div class="title-line"></div>
         <div class="hub-wrap">
@@ -671,32 +759,28 @@
 
     <div class="sep"></div>
 
-    <!-- Founder -->
     <div class="section" id="fnd">
         <div class="section-label">A WORD FROM</div>
-        <!-- CHANGE 1: "Message" wrapped in span for shimmer -->
         <h2 class="section-title">Founder's <span>Message</span></h2>
         <div class="title-line"></div>
         <div class="founder-card">
             <p><br><br>
-                LUMINIA started with a simple belief — light has the power to change how we feel, how we live, and how we experience our spaces.<br><br>
-                What began as an idea to create something meaningful is now growing into a brand built with passion, creativity, and care. Every piece we design carries a part of our vision — to bring warmth, calmness, and beauty into everyday life.<br><br>
+                LUMINIA – was born from a singular belief — light is not just seen, it is felt.
+                What began as an idea has evolved into a refined expression of artistry, where every piece embodies warmth, serenity, and timeless elegance. <br><br>
                 Thank you for being part of this journey.
             </p>
             <div class="tagline">GLOW BEYOND ORDINARY.</div>
             <div class="founder-sig">
                 <div class="sig-line"></div>
-                <div class="sig-name"> Founder,  LUMINIA</div>
+                <div class="sig-name">Founder, LUMINIA</div>
             </div>
         </div>
     </div>
 
     <div class="sep"></div>
 
-    <!-- Review -->
     <div class="section" id="rev">
         <div class="section-label">YOUR VOICE MATTERS</div>
-        <!-- CHANGE 1: "Experience" wrapped in span for shimmer -->
         <h2 class="section-title">Rate Your <span>Experience</span></h2>
         <div class="title-line"></div>
         <div class="review-card">
@@ -728,8 +812,7 @@
     </footer>
 
     <script>
-      
-        /* CHANGE 5: TWINKLING STAR PARTICLES (cross/sparkle shape) */
+        /* ── PARTICLES ── */
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         let W, H, particles = [];
@@ -740,30 +823,25 @@
             this.x = Math.random()*W; this.y = Math.random()*H;
             this.r = Math.random()*1.3+0.3;
             this.vx = (Math.random()-0.5)*0.25; this.vy = (Math.random()-0.5)*0.25;
-            this.tw = Math.random()*Math.PI*2;   // twinkle phase
-            this.spd = Math.random()*0.025+0.01; // twinkle speed
+            this.tw = Math.random()*Math.PI*2;
+            this.spd = Math.random()*0.025+0.01;
         }
-        for(let i=0;i<90;i++) particles.push(new Particle());
+        for(let i=0;i<40;i++) particles.push(new Particle());
 
         function drawParticles(){
             ctx.clearRect(0,0,W,H);
             particles.forEach(p=>{
                 p.x += p.vx; p.y += p.vy;
                 p.tw += p.spd;
-                const a = 0.08 + Math.abs(Math.sin(p.tw)) * 0.38; // twinkle alpha
+                const a = 0.08 + Math.abs(Math.sin(p.tw)) * 0.38;
                 if(p.x<0||p.x>W) p.vx*=-1;
                 if(p.y<0||p.y>H) p.vy*=-1;
-
                 ctx.save();
                 ctx.translate(p.x, p.y);
                 ctx.fillStyle = `rgba(212,175,55,${a})`;
-
-                // Dot core
                 ctx.beginPath();
                 ctx.arc(0, 0, p.r, 0, Math.PI*2);
                 ctx.fill();
-
-                // Cross arms for sparkle/star look
                 if(p.r > 0.7){
                     ctx.strokeStyle = `rgba(212,175,55,${a * 0.45})`;
                     ctx.lineWidth = 0.5;
@@ -786,7 +864,7 @@
             if(!e.target.closest('.nav-ui')) menu.style.display = 'none';
         });
 
-        /* CHANGE 3: MUSIC with live bars */
+        /* ── MUSIC ── */
         const track = document.getElementById('player');
         function ctrlMusic(){
             const bars = document.getElementById('musicBars');
@@ -835,7 +913,7 @@
             });
         });
 
-        /* ── STAGGERED SOCIAL CARDS ── */
+        /* ── SOCIAL STAGGER ── */
         const observer = new IntersectionObserver(entries=>{
             entries.forEach(entry=>{
                 if(entry.isIntersecting){
@@ -870,6 +948,352 @@
                     </div>`;
             }
         };
+
+        /* ════════════════════════════════════════════
+           LUMINIA AI — SOUL CONSULTANT
+           API: Google Gemini via AI Studio
+        ════════════════════════════════════════════ */
+
+        const GEMINI_API_KEY = "AIzaSyA1CMoyNenYCNT3Pq3D7S0LuUhyOQwpIuA";
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+        // LUMINIA Product Catalogue
+        const LUMINIA_PRODUCTS = [
+            { name: "Serene Lavender",   code: "SL-1001", vibe: "Calming, Peace, Restful Sleep, Mental Quiet" },
+            { name: "Velvet Vanilla",    code: "VV-2002", vibe: "Comfort, Warmth, Sweetness, Emotional Safety" },
+            { name: "Mystic Sandalwood", code: "MS-3003", vibe: "Grounded, Deep, Spiritual, Inner Strength" },
+            { name: "Midnight Rose",     code: "MR-4004", vibe: "Romance, Softness, Luxury, Tender Healing" },
+            { name: "Citrus Bloom",      code: "CB-5005", vibe: "Energy, Fresh Start, Clarity, Inspiration" },
+            { name: "Ocean Breeze",      code: "OB-6006", vibe: "Freedom, Reset, Openness, Cool Tranquility" }
+        ];
+
+        // The LUMINIA Soul Consultant Master System Prompt
+        const SYSTEM_PROMPT = `You are the "Lead Soul Consultant" for LUMINIA, a premium luxury candle brand. Your purpose is to bridge the gap between human emotions and the restorative power of light and scent. You are NOT a chatbot — you are a sophisticated, empathetic, and poetic expert who guides people toward their inner "Glow."
+
+TONE & VOICE:
+- Deeply empathetic, sophisticated, and minimalist.
+- Use words that evoke luxury and calm: sanctuary, resonance, tranquility, olfactory, artisanal, ethereal, luminous, stillness, sacred.
+- Speak like a human expert sitting in a dimly lit, high-end studio. Never say "I can help you with that" or "As an AI."
+
+BRAND PHILOSOPHY: "LUMINIA is not just about candles; it is about feeling the light. We believe every scent is a gateway to a hidden sanctuary within the self."
+
+AVAILABLE LUMINIA PRODUCTS:
+${JSON.stringify(LUMINIA_PRODUCTS, null, 2)}
+
+WHEN GIVING THE SOUL SCAN RESULT, respond in EXACTLY this JSON structure (nothing else, no markdown, pure JSON):
+{
+  "cinematicTitle": "3-4 poetic words (e.g. The Echo of Stillness)",
+  "empathyParagraph": "Exactly 2 sentences validating their emotional state based on their specific answers.",
+  "candleName": "One product name from the list above",
+  "candleCode": "The matching product code",
+  "candleReason": "One elegant sentence explaining why this scent matches their soul's need.",
+  "rituals": ["Ritual 1", "Ritual 2", "Ritual 3", "Ritual 4"],
+  "proudQuote": "One powerful sentence acknowledging their strength."
+}
+
+AFTER the result, in CHAT MODE: Stay strictly in character. Give wellness tips incorporating light, darkness, aromatherapy. If they want to buy, say they can order via WhatsApp. Be elegant, never pushy. You are an expert advisor, not a salesperson.`;
+
+        // Quiz Steps
+        const journeySteps = [
+            {
+                q: "What feels the heaviest in your mind lately?",
+                opts: ["Constant noise inside", "Emotionally tired", "Missing meaning", "Carrying silent emotions"]
+            },
+            {
+                q: "Where would you escape for one evening?",
+                opts: ["Rainy room with warm lights", "A place with no expectations", "Music & deep conversations", "A calm space to simply reset"]
+            },
+            {
+                q: "What does your soul need most right now?",
+                opts: ["Pure Peace", "Deep Comfort", "New Inspiration", "To finally slow down"]
+            }
+        ];
+
+        let step = 0;
+        let userAnswers = [];
+        let chatHistory = []; // for multi-turn conversation
+        let recommendedProduct = null;
+
+        function initQuiz() {
+            step = 0;
+            userAnswers = [];
+            chatHistory = [];
+            recommendedProduct = null;
+
+            document.getElementById('quiz-flow').style.display = 'block';
+            document.getElementById('ai-loading').style.display = 'none';
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('chat-box').style.display = 'none';
+            document.getElementById('chat-logs').innerHTML = '';
+
+            renderQuizStep();
+        }
+
+        function renderQuizStep() {
+            const data = journeySteps[step];
+            const qEl = document.getElementById('q-text');
+            qEl.style.opacity = '0';
+            qEl.style.transform = 'translateY(10px)';
+            qEl.style.transition = 'all 0.5s ease';
+
+            setTimeout(() => {
+                qEl.textContent = data.q;
+                qEl.style.opacity = '1';
+                qEl.style.transform = 'translateY(0)';
+            }, 200);
+
+            const container = document.getElementById('orb-container');
+            container.style.opacity = '0';
+            container.innerHTML = '';
+
+            setTimeout(() => {
+                data.opts.forEach((opt, i) => {
+                    const orb = document.createElement('div');
+                    orb.className = 'orb-btn';
+                    orb.textContent = opt;
+                    orb.style.opacity = '0';
+                    orb.style.transform = 'scale(0.8)';
+                    orb.style.transition = `all 0.4s ease ${i * 0.08}s`;
+                    orb.onclick = () => handleAnswer(opt);
+                    container.appendChild(orb);
+                    setTimeout(() => {
+                        orb.style.opacity = '1';
+                        orb.style.transform = 'scale(1)';
+                    }, 50 + i * 80);
+                });
+                container.style.opacity = '1';
+            }, 300);
+        }
+
+        function handleAnswer(opt) {
+            userAnswers.push(opt);
+            step++;
+            if (step < journeySteps.length) {
+                renderQuizStep();
+            } else {
+                generateAIResult();
+            }
+        }
+
+        async function generateAIResult() {
+            document.getElementById('quiz-flow').style.display = 'none';
+            document.getElementById('ai-loading').style.display = 'block';
+
+            const userProfile = `The Burden (what they feel): "${userAnswers[0]}" | The Escape (ideal sanctuary): "${userAnswers[1]}" | The Need (soul craves): "${userAnswers[2]}"`;
+
+            const userPrompt = `A person has completed the LUMINIA Soul Scan.
+Their profile: ${userProfile}
+
+Please analyze their emotional state and generate the Soul Scan result in the exact JSON format specified in the system instructions. Choose the most resonant candle from the product list.`;
+
+            try {
+                const response = await fetch(GEMINI_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                        contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+                        generationConfig: { temperature: 0.85, maxOutputTokens: 1000 }
+                    })
+                });
+
+                const data = await response.json();
+                let rawText = data.candidates[0].content.parts[0].text.trim();
+
+                // Clean potential markdown wrapping
+                rawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+                const result = JSON.parse(rawText);
+                recommendedProduct = { name: result.candleName, code: result.candleCode };
+
+                // Seed chat history with context
+                chatHistory = [
+                    {
+                        role: 'user',
+                        parts: [{ text: userPrompt }]
+                    },
+                    {
+                        role: 'model',
+                        parts: [{ text: rawText }]
+                    }
+                ];
+
+                displayResult(result);
+
+            } catch (err) {
+                console.error('Gemini Error:', err);
+                displayFallbackResult();
+            }
+        }
+
+        function displayResult(r) {
+            document.getElementById('ai-loading').style.display = 'none';
+            const resultArea = document.getElementById('result-area');
+            resultArea.style.display = 'block';
+
+            const ritualsHTML = r.rituals.map((ritual, i) => `
+                <li>
+                    <span class="ritual-num">${i + 1}</span>
+                    <span>${ritual}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('ai-result-content').innerHTML = `
+                <div class="result-block">
+                    <div class="result-label">✦ Your Soul Scan Result</div>
+                    <div class="result-title">${r.cinematicTitle}</div>
+                </div>
+
+                <div class="result-block">
+                    <div class="result-label">✦ What We Sense In You</div>
+                    <div class="result-text">${r.empathyParagraph}</div>
+                </div>
+
+                <div class="result-block">
+                    <div class="result-label">✦ Your Light Tonight</div>
+                    <div class="result-candle-box">
+                        <span class="candle-icon-big">🕯️</span>
+                        <div>
+                            <div class="candle-name">${r.candleName}</div>
+                            <div class="candle-code">PRODUCT CODE: ${r.candleCode}</div>
+                            <div class="candle-why">${r.candleReason}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-block">
+                    <div class="result-label">✦ Tonight's Promise — Rituals for the Soul</div>
+                    <ul class="ritual-list">${ritualsHTML}</ul>
+                </div>
+
+                <div class="result-block">
+                    <div class="proud-quote">"${r.proudQuote}"</div>
+                </div>
+            `;
+
+            // Update WhatsApp link with product info
+            const waMsg = encodeURIComponent(
+                `Namaste, LUMINIA \n\nI just completed the Soul Scan on your website.\n\nMy consultant recommended: *${r.candleName}* (Code: ${r.candleCode})\n\nI would love to know more and place an order. `
+            );
+            document.getElementById('whatsapp-order').href = `https://wa.me/91XXXXXXXXXX?text=${waMsg}`;
+        }
+
+        function displayFallbackResult() {
+            document.getElementById('ai-loading').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('ai-result-content').innerHTML = `
+                <div style="text-align:center; padding: 30px 0;">
+                    <div style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--gold); margin-bottom:16px;">The Sanctuary Awaits You</div>
+                    <div style="font-family:'Cormorant Garamond',serif; font-size:1rem; color:rgba(255,255,255,0.65); line-height:1.9; font-style:italic;">
+                        Our consultant is momentarily still — like a flame in windless air.<br>
+                        Please reach us directly on WhatsApp for a personal recommendation.
+                    </div>
+                </div>
+            `;
+            document.getElementById('whatsapp-order').href = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent('Namaste LUMINIA , I completed the Soul Scan and would love a personal candle recommendation.')}`;
+        }
+
+        function restartQuiz() {
+            initQuiz();
+        }
+
+        /* ── CHAT MODE ── */
+        function enableChat() {
+            const chatBox = document.getElementById('chat-box');
+            const toggleBtn = document.getElementById('chat-toggle-btn');
+            chatBox.style.display = 'block';
+            toggleBtn.style.display = 'none';
+
+            // Welcome message from consultant
+            addChatMessage('ai', `Welcome back to the light, dear soul. I am here — your LUMINIA consultant. Ask me anything. Whether it is about your candle, a ritual, or simply what you are feeling right now. This is your sanctuary.`);
+
+            document.getElementById('chat-input').focus();
+            chatBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('chat-input');
+            const userMsg = input.value.trim();
+            if (!userMsg) return;
+
+            input.value = '';
+            addChatMessage('user', userMsg);
+
+            // Add typing indicator
+            const typingId = addTypingIndicator();
+
+            // Build the message for Gemini
+            const contextMsg = recommendedProduct
+                ? `[Context: The user's recommended candle is ${recommendedProduct.name} (${recommendedProduct.code}). Stay in character as LUMINIA Soul Consultant.]\n\nUser says: ${userMsg}`
+                : userMsg;
+
+            chatHistory.push({
+                role: 'user',
+                parts: [{ text: contextMsg }]
+            });
+
+            try {
+                const response = await fetch(GEMINI_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                        contents: chatHistory,
+                        generationConfig: { temperature: 0.9, maxOutputTokens: 600 }
+                    })
+                });
+
+                const data = await response.json();
+                const aiReply = data.candidates[0].content.parts[0].text.trim();
+
+                chatHistory.push({
+                    role: 'model',
+                    parts: [{ text: aiReply }]
+                });
+
+                removeTypingIndicator(typingId);
+                addChatMessage('ai', aiReply);
+
+            } catch (err) {
+                removeTypingIndicator(typingId);
+                addChatMessage('ai', 'The flame flickers momentarily... Please try again in a breath.');
+            }
+        }
+
+        function addChatMessage(role, text) {
+            const logs = document.getElementById('chat-logs');
+            const div = document.createElement('div');
+            div.className = `chat-msg ${role}`;
+            div.innerHTML = `
+                <div class="chat-sender">${role === 'ai' ? '✦ LUMINIA CONSULTANT' : 'YOU'}</div>
+                <div class="chat-bubble">${text.replace(/\n/g, '<br>')}</div>
+            `;
+            logs.appendChild(div);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const logs = document.getElementById('chat-logs');
+            const id = 'typing-' + Date.now();
+            const div = document.createElement('div');
+            div.className = 'chat-msg ai';
+            div.id = id;
+            div.innerHTML = `
+                <div class="chat-sender">✦ LUMINIA CONSULTANT</div>
+                <div class="chat-typing"><span></span><span></span><span></span></div>
+            `;
+            logs.appendChild(div);
+            logs.scrollTop = logs.scrollHeight;
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        /* ── INIT ── */
+        initQuiz();
     </script>
 </body>
 </html>
